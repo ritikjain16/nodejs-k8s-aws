@@ -8,6 +8,6 @@ spec:
     app: nodejs-app
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
+      port: 6000
+      targetPort: 6000
   type: ClusterIP
