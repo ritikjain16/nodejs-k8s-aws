@@ -30,66 +30,6 @@
 
 # # pkill -f "kubectl port-forward"
 
-#!/bin/bash
-# ====================================================================================
-# # Exit on any error
-# set -e
-
-# # Define paths
-# APP_DIR="/home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws"
-# K8S_DIR="$APP_DIR/k8s"
-# IMAGE_NAME="rj1608/nodejs-app-k8s"
-# NAMESPACE="nodejs-app"
-# PORT_FORWARD_LOG="portforward.log"
-
-# echo "===================================="
-# echo "🚀 Starting Node.js App Deployment"
-# echo "===================================="
-
-# echo "📁 Changing directory to Kubernetes manifests folder..."
-# cd "$K8S_DIR"
-
-# echo "🧹 Cleaning up existing Kubernetes resources (namespace, deployment, service)..."
-# kubectl delete -f namespace.yml -f deployment.yml -f service.yml || echo "⚠️ Some resources may not have existed. Continuing..."
-
-# echo "🛠️ Building Docker image: $IMAGE_NAME"
-# cd "$APP_DIR"
-# docker build -t "$IMAGE_NAME" .
-
-# echo "📤 Pushing Docker image to Docker Hub..."
-# docker push "$IMAGE_NAME"
-
-# echo "📁 Switching back to Kubernetes manifests folder..."
-# cd "$K8S_DIR"
-
-# echo "📦 Applying Kubernetes manifests..."
-# kubectl apply -f namespace.yml -f deployment.yml -f service.yml
-
-# echo "⏳ Waiting for 20 seconds for pods to initialize..."
-# sleep 20
-
-# echo "🔍 Checking pod status..."
-# kubectl get pods -n "$NAMESPACE"
-
-# echo "🔍 Checking deployment status..."
-# kubectl get deployments -n "$NAMESPACE"
-
-# echo "🔍 Checking service status..."
-# kubectl get svc -n "$NAMESPACE"
-
-# echo "🌐 Setting up port forwarding on port 4000 -> 6000..."
-# nohup kubectl port-forward service/nodejs-app-service -n "$NAMESPACE" 4000:6000 --address=0.0.0.0 > "$PORT_FORWARD_LOG" 2>&1 &
-
-# echo "📋 Running processes with 'kubectl'..."
-# ps aux | grep "[k]ubectl"
-
-# echo "✅ Deployment completed successfully!"
-# echo "💡 Access your app at http://<your-ec2-ip>:4000"
-
-# # Uncomment to stop port-forwarding in the future
-# # echo "❌ Stopping port-forwarding..."
-# # pkill -f "kubectl port-forward"
-
 # ============================================================================================
 
 #!/bin/bash
