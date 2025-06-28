@@ -4,6 +4,8 @@ kubectl delete -f namespace.yml -f deployment.yml -f service.yml
 
 echo "Deployment Started!!!"
 
+cd /home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws
+
 docker build -t rj1608/nodejs-app-k8s .
 
 docker push rj1608/nodejs-app-k8s
