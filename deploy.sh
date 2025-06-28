@@ -1,3 +1,7 @@
+cd /home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws/k8s
+
+kubectl delete -f namespace.yml -f deployment.yml -f service.yml
+
 echo "Deployment Started!!!"
 
 docker build -t rj1608/nodejs-app-k8s .
@@ -13,6 +17,8 @@ kubectl get pods -n nodejs-app
 kubectl get deployments -n nodejs-app
 
 kubectl get svc -n nodejs-app
+
+sleep 20
 
 kubectl port-forward service/nodejs-app-service -n nodejs-app 4000:6000 --address=0.0.0.0
 
