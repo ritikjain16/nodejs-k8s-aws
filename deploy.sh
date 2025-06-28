@@ -159,7 +159,26 @@ kubectl apply -f namespace.yml -f deployment.yml -f service.yml
 # ----------------------
 # Wait for Pods to be Ready
 # ----------------------
-echo -n "⏳ Waiting for pods to be ready in namespace [$NAMESPACE] "
+echo "🔍 Waiting for pods to be created in namespace [$NAMESPACE]..."
+
+# Wait until at least one pod exists
+for i in {1..30}; do
+  POD_COUNT=$(kubectl get pods -n "$NAMESPACE" --no-headers --ignore-not-found | wc -l)
+  if [ "$POD_COUNT" -gt 0 ]; then
+    echo "✅ Pods found: $POD_COUNT"
+    break
+  fi
+  echo -n "."
+  sleep 1
+done
+
+if [ "$POD_COUNT" -eq 0 ]; then
+  echo "❌ No pods were created in namespace [$NAMESPACE] within 30 seconds."
+  exit 1
+fi
+
+# Now wait for those pods to become ready
+echo -n "⏳ Waiting for pods to be ready "
 kubectl wait --for=condition=ready pod --all -n "$NAMESPACE" --timeout=60s &
 
 # Spinner while waiting
