@@ -4,7 +4,7 @@ docker build -t rj1608/nodejs-app-k8s .
 
 docker push rj1608/nodejs-app-k8s
 
-cd /k8s
+cd /home/ubuntu/kind-cluster/kube-in-one-shot/nodejs-k8s-aws/k8s
 
 kubectl apply -f namespace.yml -f deployment.yml -f service.yml
 
